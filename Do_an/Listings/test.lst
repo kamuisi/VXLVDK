@@ -1,0 +1,271 @@
+A51 MACRO ASSEMBLER  TEST                                                                 05/25/2024 19:05:55 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\test.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE test.a51 SET(SMALL) DEBUG PRINT(.\Listings\test.lst) OBJECT(.\Objects\t
+                      est.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0h
+0000 758901            2             mov TMOD, #1d
+0003 1126              3             acall Res_back
+0005                   4             main:   
+                       5             
+0005 7A08              6             mov R2, #8d
+0007 7C08              7             mov R4, #8d
+0009 1200A8            8             lcall Send_0
+000C 12002D            9             lcall Send_1
+000F 1126             10             acall Res_back
+                      11             
+0011 020005           12             ljmp main
+                      13             
+0014                  14             Delay:
+0014 758C00           15             mov TH0, #0h
+0017 758A00           16             mov TL0, #0h
+001A D28C             17             setb TR0
+001C 308DFD           18             loop: jnb TF0, loop
+001F C28D             19             clr TF0
+0021 C28C             20             clr TR0
+0023 D9EF             21             djnz R1, Delay
+0025 22               22             ret
+                      23             
+0026                  24             Res_back:
+0026 7971             25             mov R1, #113d
+0028 C2A2             26             clr P2.2
+002A                  27             wait:
+002A D9FE             28             djnz R1, wait
+002C 22               29             ret
+                      30             
+002D                  31             Send_1:
+002D D2A2             32             setb P2.2
+002F 00               33             nop
+0030 C2A2             34             clr P2.2
+                      35             
+0032 D2A2             36             setb P2.2
+0034 00               37             nop
+0035 C2A2             38             clr P2.2
+                      39             
+0037 D2A2             40             setb P2.2
+0039 00               41             nop
+003A C2A2             42             clr P2.2
+                      43             
+003C D2A2             44             setb P2.2
+003E 00               45             nop
+003F C2A2             46             clr P2.2
+                      47             
+0041 D2A2             48             setb P2.2
+0043 00               49             nop
+0044 C2A2             50             clr P2.2
+                      51             
+0046 D2A2             52             setb P2.2
+0048 00               53             nop
+0049 C2A2             54             clr P2.2
+                      55             
+004B D2A2             56             setb P2.2
+004D 00               57             nop
+A51 MACRO ASSEMBLER  TEST                                                                 05/25/2024 19:05:55 PAGE     2
+
+004E C2A2             58             clr P2.2
+                      59             
+0050 D2A2             60             setb P2.2
+0052 00               61             nop
+0053 C2A2             62             clr P2.2
+                      63             
+0055 D2A2             64             setb P2.2
+0057 00               65             nop
+0058 C2A2             66             clr P2.2
+                      67             
+005A D2A2             68             setb P2.2
+005C 00               69             nop
+005D C2A2             70             clr P2.2
+                      71             
+005F D2A2             72             setb P2.2
+0061 00               73             nop
+0062 C2A2             74             clr P2.2
+                      75             
+0064 D2A2             76             setb P2.2
+0066 00               77             nop
+0067 C2A2             78             clr P2.2
+                      79             
+0069 D2A2             80             setb P2.2
+006B 00               81             nop
+006C C2A2             82             clr P2.2
+                      83             
+006E D2A2             84             setb P2.2
+0070 00               85             nop
+0071 C2A2             86             clr P2.2
+                      87             
+0073 D2A2             88             setb P2.2
+0075 00               89             nop
+0076 C2A2             90             clr P2.2
+                      91             
+0078 D2A2             92             setb P2.2
+007A 00               93             nop
+007B C2A2             94             clr P2.2
+                      95             
+007D D2A2             96             setb P2.2
+007F 00               97             nop
+0080 C2A2             98             clr P2.2
+                      99             
+0082 D2A2            100             setb P2.2
+0084 00              101             nop
+0085 C2A2            102             clr P2.2
+                     103             
+0087 D2A2            104             setb P2.2
+0089 00              105             nop
+008A C2A2            106             clr P2.2
+                     107             
+008C D2A2            108             setb P2.2
+008E 00              109             nop
+008F C2A2            110             clr P2.2
+                     111             
+0091 D2A2            112             setb P2.2
+0093 00              113             nop
+0094 C2A2            114             clr P2.2
+                     115             
+0096 D2A2            116             setb P2.2
+0098 00              117             nop
+0099 C2A2            118             clr P2.2
+                     119             
+009B D2A2            120             setb P2.2
+009D 00              121             nop
+009E C2A2            122             clr P2.2
+                     123             
+A51 MACRO ASSEMBLER  TEST                                                                 05/25/2024 19:05:55 PAGE     3
+
+00A0 D2A2            124             setb P2.2
+00A2 00              125             nop
+00A3 C2A2            126             clr P2.2
+00A5 DA86            127             djnz R2, Send_1
+00A7 22              128             ret
+                     129             
+00A8                 130             Send_0:
+00A8 D2A2            131             setb P2.2
+00AA C2A2            132             clr P2.2
+00AC 00              133             nop
+                     134             
+00AD D2A2            135             setb P2.2
+00AF C2A2            136             clr P2.2
+00B1 00              137             nop
+                     138             
+00B2 D2A2            139             setb P2.2
+00B4 C2A2            140             clr P2.2
+00B6 00              141             nop
+                     142             
+00B7 D2A2            143             setb P2.2
+00B9 C2A2            144             clr P2.2
+00BB 00              145             nop
+                     146             
+00BC D2A2            147             setb P2.2
+00BE C2A2            148             clr P2.2
+00C0 00              149             nop
+                     150             
+00C1 D2A2            151             setb P2.2
+00C3 C2A2            152             clr P2.2
+00C5 00              153             nop
+                     154             
+00C6 D2A2            155             setb P2.2
+00C8 C2A2            156             clr P2.2
+00CA 00              157             nop
+                     158             
+00CB D2A2            159             setb P2.2
+00CD C2A2            160             clr P2.2
+00CF 00              161             nop
+                     162             
+00D0 D2A2            163             setb P2.2
+00D2 C2A2            164             clr P2.2
+00D4 00              165             nop
+                     166             
+00D5 D2A2            167             setb P2.2
+00D7 C2A2            168             clr P2.2
+00D9 00              169             nop
+                     170             
+00DA D2A2            171             setb P2.2
+00DC C2A2            172             clr P2.2
+00DE 00              173             nop
+                     174             
+00DF D2A2            175             setb P2.2
+00E1 C2A2            176             clr P2.2
+00E3 00              177             nop
+                     178             
+00E4 D2A2            179             setb P2.2
+00E6 C2A2            180             clr P2.2
+00E8 00              181             nop
+                     182             
+00E9 D2A2            183             setb P2.2
+00EB C2A2            184             clr P2.2
+00ED 00              185             nop
+                     186             
+00EE D2A2            187             setb P2.2
+00F0 C2A2            188             clr P2.2
+00F2 00              189             nop
+A51 MACRO ASSEMBLER  TEST                                                                 05/25/2024 19:05:55 PAGE     4
+
+                     190             
+00F3 D2A2            191             setb P2.2
+00F5 C2A2            192             clr P2.2
+00F7 00              193             nop
+                     194             
+00F8 D2A2            195             setb P2.2
+00FA C2A2            196             clr P2.2
+00FC 00              197             nop
+                     198             
+00FD D2A2            199             setb P2.2
+00FF C2A2            200             clr P2.2
+0101 00              201             nop
+                     202             
+0102 D2A2            203             setb P2.2
+0104 C2A2            204             clr P2.2
+0106 00              205             nop
+                     206             
+0107 D2A2            207             setb P2.2
+0109 C2A2            208             clr P2.2
+010B 00              209             nop
+                     210             
+010C D2A2            211             setb P2.2
+010E C2A2            212             clr P2.2
+0110 00              213             nop
+                     214             
+0111 D2A2            215             setb P2.2
+0113 C2A2            216             clr P2.2
+0115 00              217             nop
+                     218             
+0116 D2A2            219             setb P2.2
+0118 C2A2            220             clr P2.2
+011A 00              221             nop
+                     222             
+011B D2A2            223             setb P2.2
+011D C2A2            224             clr P2.2
+011F 00              225             nop
+0120 DC86            226             djnz R4, Send_0
+0122 22              227             ret
+                     228     END
+A51 MACRO ASSEMBLER  TEST                                                                 05/25/2024 19:05:55 PAGE     5
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0014H   A   
+LOOP . . . . . . .  C ADDR   001CH   A   
+MAIN . . . . . . .  C ADDR   0005H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+RES_BACK . . . . .  C ADDR   0026H   A   
+SEND_0 . . . . . .  C ADDR   00A8H   A   
+SEND_1 . . . . . .  C ADDR   002DH   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+WAIT . . . . . . .  C ADDR   002AH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

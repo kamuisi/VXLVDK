@@ -1,0 +1,235 @@
+A51 MACRO ASSEMBLER  LAB_5                                                                05/17/2024 13:02:52 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\lab_5.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE lab_5.a51 SET(SMALL) DEBUG PRINT(.\Listings\lab_5.lst) OBJECT(.\Objects
+                      \lab_5.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 020040            2     ljmp main
+0003                   3     org 0003h
+0003 1210BE            4     lcall Handler_Button_0
+0006 32                5     reti
+0013                   6     org 0013h
+0013 1210C7            7     lcall Handler_Button_1
+0016 32                8     reti
+001B                   9     org 001Bh
+001B 121057           10     lcall Handler_T1
+001E 32               11     reti
+0040                  12     org 40h
+0040                  13     main:
+0040 3F               14     db 3fh
+0041 06               15     db 6h
+0042 5B               16     db 5bh
+0043 4F               17     db 4fh
+0044 66               18     db 66h
+0045 6D               19     db 6dh
+0046 7D               20     db 7dh
+0047 07               21     db 7h
+0048 7F               22     db 7fh
+0049 6F               23     db 6fh
+1000                  24     org 1000h
+1000 7800             25     mov R0, #0h
+1002 7900             26     mov R1, #0h
+1004 7A00             27     mov R2, #0h
+1006 7B00             28     mov R3, #0h
+                      29     
+1008 7C3F             30     mov R4, #3fh
+100A 7D3F             31     mov R5, #3fh
+100C 7E3F             32     mov R6, #3fh
+100E 7F3F             33     mov R7, #3fh
+                      34     
+1010 75A88D           35     mov IE, #10001101b
+1013 75B801           36     mov IP, #1b
+1016 D288             37     setb IT0
+1018 D28A             38     setb IT1
+101A 758911           39     mov TMOD, #00010001b
+101D 758D00           40     mov TH1, #0h
+1020 758B00           41     mov TL1, #0h
+1023 D28E             42     setb TR1
+1025                  43     Loop:
+1025 8F80             44     mov P0, R7
+1027 C2A0             45     clr P2.0
+1029 1147             46     acall Delay
+102B D2A0             47     setb P2.0
+102D 8E80             48     mov P0, R6
+102F C2A1             49     clr P2.1
+1031 1147             50     acall Delay
+1033 D2A1             51     setb P2.1
+1035 8D80             52     mov P0, R5
+1037 C2A2             53     clr P2.2
+1039 1147             54     acall Delay
+103B D2A2             55     setb P2.2
+103D 8C80             56     mov P0, R4
+103F C2A3             57     clr P2.3
+A51 MACRO ASSEMBLER  LAB_5                                                                05/17/2024 13:02:52 PAGE     2
+
+1041 1147             58     acall Delay
+1043 D2A3             59     setb P2.3
+1045 80DE             60     sjmp Loop
+                      61     
+1047                  62     Delay:
+1047 758CEC           63     mov TH0, #0ech
+104A 758A78           64     mov TL0, #078h
+104D D28C             65     setb TR0
+104F 308DFD           66     wait: jnb TF0, wait
+1052 C28D             67     clr TF0
+1054 C28C             68     clr TR0
+1056 22               69     ret
+                      70             
+1057                  71     Handler_T1:
+                      72     
+1057 E5F0             73     mov a, b
+1059 2401             74     add a, #1d
+105B F5F0             75     mov b, a
+105D B41033           76     cjne a, #16d, return
+1060 75F000           77     mov b, #0h
+                      78     
+1063                  79     Tang_1s:
+1063 08               80     inc R0
+1064 B80A33           81     cjne R0, #10d, num_1_0
+1067 7800             82     mov R0, #0h
+1069 900040           83     mov dptr, #40h
+106C E8               84     mov A, R0
+106D 93               85     movc A, @A+dptr
+106E FC               86     mov R4, A
+106F 09               87     inc R1
+1070 B90A30           88     cjne R1, #10d, num_2_0
+1073 7900             89     mov R1, #0h
+1075 900040           90     mov dptr, #40h
+1078 E9               91     mov A, R1
+1079 93               92     movc A, @A+dptr
+107A FD               93     mov R5, A
+107B 0A               94     inc R2
+107C BA0A2D           95     cjne R2, #10d, num_3_0
+107F 7A00             96     mov R2, #0h
+1081 900040           97     mov dptr, #40h
+1084 EA               98     mov A, R2
+1085 93               99     movc A, @A+dptr
+1086 FE              100     mov R6, A
+1087 0B              101     inc R3
+1088 BB0A2A          102     cjne R3, #10d, num_4_0
+108B 7B00            103     mov R3, #0h
+108D 900040          104     mov dptr, #40h
+1090 EB              105     mov A, R3
+1091 93              106     movc A, @A+dptr
+1092 FF              107     mov R7, A
+                     108             
+1093                 109     return:
+1093 758D00          110     mov TH1, #0h
+1096 758B00          111     mov TL1, #0h
+1099 22              112     ret
+                     113             
+109A                 114     num_1_0:
+109A 900040          115     mov dptr, #40h
+109D E8              116     mov A, R0
+109E 93              117     movc A, @A+dptr
+109F FC              118     mov R4, A
+10A0 021093          119     ljmp return
+10A3                 120     num_2_0:
+10A3 900040          121     mov dptr, #40h
+10A6 E9              122     mov A, R1
+10A7 93              123     movc A, @A+dptr
+A51 MACRO ASSEMBLER  LAB_5                                                                05/17/2024 13:02:52 PAGE     3
+
+10A8 FD              124     mov R5, A
+10A9 021093          125     ljmp return
+10AC                 126     num_3_0:
+10AC 900040          127     mov dptr, #40h
+10AF EA              128     mov A, R2
+10B0 93              129     movc A, @A+dptr
+10B1 FE              130     mov R6, A
+10B2 021093          131     ljmp return
+10B5                 132     num_4_0:
+10B5 900040          133     mov dptr, #40h
+10B8 EB              134     mov A, R3
+10B9 93              135     movc A, @A+dptr
+10BA FF              136     mov R7, A
+10BB 021093          137     ljmp return
+                     138             
+10BE                 139     Handler_Button_0: 
+10BE 208E03          140     jb TR1, zero
+10C1 D28E            141     setb TR1
+10C3 22              142     ret
+10C4                 143     zero:
+10C4 C28E            144     clr TR1
+10C6 22              145     ret
+                     146     
+10C7                 147     Handler_Button_1:
+10C7 20A499          148     jb P2.4, Tang_1s
+10CA 18              149     dec R0
+10CB B8FFCC          150     cjne R0, #-1d, num_1_0
+10CE 7809            151     mov R0, #9h
+10D0 900040          152     mov dptr, #40h
+10D3 E8              153     mov A, R0
+10D4 93              154     movc A, @A+dptr
+10D5 FC              155     mov R4, A
+10D6 19              156     dec R1
+10D7 B9FFC9          157     cjne R1, #-1d, num_2_0
+10DA 7909            158     mov R1, #9h
+10DC 900040          159     mov dptr, #40h
+10DF E9              160     mov A, R1
+10E0 93              161     movc A, @A+dptr
+10E1 FD              162     mov R5, A
+10E2 1A              163     dec R2
+10E3 BAFFC6          164     cjne R2, #-1d, num_3_0
+10E6 7A09            165     mov R2, #9h
+10E8 900040          166     mov dptr, #40h
+10EB EA              167     mov A, R2
+10EC 93              168     movc A, @A+dptr
+10ED FE              169     mov R6, A
+10EE 1B              170     dec R3
+10EF BBFFC3          171     cjne R3, #-1d, num_4_0
+10F2 7B09            172     mov R3, #9h
+10F4 900040          173     mov dptr, #40h
+10F7 EB              174     mov A, R3
+10F8 93              175     movc A, @A+dptr
+10F9 FF              176     mov R7, A
+10FA 22              177     ret
+                     178     END
+A51 MACRO ASSEMBLER  LAB_5                                                                05/17/2024 13:02:52 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+DELAY. . . . . . .  C ADDR   1047H   A   
+HANDLER_BUTTON_0 .  C ADDR   10BEH   A   
+HANDLER_BUTTON_1 .  C ADDR   10C7H   A   
+HANDLER_T1 . . . .  C ADDR   1057H   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+IP . . . . . . . .  D ADDR   00B8H   A   
+IT0. . . . . . . .  B ADDR   0088H.0 A   
+IT1. . . . . . . .  B ADDR   0088H.2 A   
+LOOP . . . . . . .  C ADDR   1025H   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+NUM_1_0. . . . . .  C ADDR   109AH   A   
+NUM_2_0. . . . . .  C ADDR   10A3H   A   
+NUM_3_0. . . . . .  C ADDR   10ACH   A   
+NUM_4_0. . . . . .  C ADDR   10B5H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+RETURN . . . . . .  C ADDR   1093H   A   
+TANG_1S. . . . . .  C ADDR   1063H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+WAIT . . . . . . .  C ADDR   104FH   A   
+ZERO . . . . . . .  C ADDR   10C4H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,81 @@
+A51 MACRO ASSEMBLER  ADC                                                                  05/25/2024 18:31:43 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\adc.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE adc.a51 SET(SMALL) DEBUG PRINT(.\Listings\adc.lst) OBJECT(.\Objects\adc
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0h
+0000 020030            2             ljmp init
+001B                   3     org 1bh
+001B 120046            4             lcall Clock
+001E 32                5             reti
+                       6             
+                       7             
+0030                   8     org 30h
+0030                   9             init:
+0030 758911           10             mov TMOD, #00010001b
+0033 75A888           11             mov IE, #10001000b
+0036 758DFF           12             mov TH1, #0ffh
+0039 758BFD           13             mov TL1, #0fdh
+                      14             ;setb P2.1
+                      15             ;setb TR1
+003C D28E             16             setb TR1
+003E D2A1             17             setb P2.1
+0040 1156             18             acall Delay
+                      19             ;clr P2.1
+0042 C28E             20             clr TR1   
+                      21             
+0044 80EA             22             jmp init
+0046                  23     Clock:
+0046 20A304           24             jb P2.3, zero
+0049 D2A3             25             setb P2.3
+004B 8002             26             jmp exit_clock
+004D                  27             zero:
+004D C2A3             28             clr P2.3
+004F                  29             exit_clock:
+004F 758DFF           30             mov TH1, #0ffh
+0052 758BFD           31             mov TL1, #0fdh
+0055 22               32             ret
+0056                  33     Delay:
+0056 758CFE           34             mov TH0, #0feh
+0059 758AF9           35             mov TL0, #0f9h
+005C D28C             36             setb TR0
+005E 308DFD           37             loop: jnb TF0, loop
+0061 C28D             38             clr TF0
+0063 C28C             39             clr TR0
+0065 22               40             ret
+                      41     END
+A51 MACRO ASSEMBLER  ADC                                                                  05/25/2024 18:31:43 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CLOCK. . . . . . .  C ADDR   0046H   A   
+DELAY. . . . . . .  C ADDR   0056H   A   
+EXIT_CLOCK . . . .  C ADDR   004FH   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+INIT . . . . . . .  C ADDR   0030H   A   
+LOOP . . . . . . .  C ADDR   005EH   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+ZERO . . . . . . .  C ADDR   004DH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
