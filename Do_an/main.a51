@@ -195,100 +195,81 @@ org 30h
 	
 	Send_1:
 	setb P2.2
-	nop
 	clr P2.2
-	
+	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
 	setb P2.2
 	nop
 	clr P2.2
-	
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
 	setb P2.2
 	nop
 	clr P2.2
-	
 	setb P2.2
 	nop
 	clr P2.2
-	
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
 	setb P2.2
 	nop
 	clr P2.2
-	
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
 	setb P2.2
 	nop
 	clr P2.2
-	
 	setb P2.2
-	nop
 	clr P2.2
-	
+	nop
 	setb P2.2
-	nop
 	clr P2.2
-	
-	setb P2.2
 	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
-	
-	setb P2.2
-	nop
-	clr P2.2
+
+
+
+
 	djnz R2, Send_1
 	ret
 	
