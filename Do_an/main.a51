@@ -207,8 +207,35 @@ org 30h
 	clr P2.2
 	nop
 	setb P2.2
+	nop
+	clr P2.2
+	setb P2.2
+	nop
+	clr P2.2
+	setb P2.2
 	clr P2.2
 	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	clr P2.2
+	nop
+	setb P2.2
+	nop
+	clr P2.2
+	setb P2.2
+	nop
+	clr P2.2
 	setb P2.2
 	clr P2.2
 	nop
@@ -225,12 +252,6 @@ org 30h
 	clr P2.2
 	nop
 	setb P2.2
-	nop
-	clr P2.2
-	setb P2.2
-	clr P2.2
-	nop
-	setb P2.2
 	clr P2.2
 	nop
 	setb P2.2
@@ -245,27 +266,14 @@ org 30h
 	setb P2.2
 	clr P2.2
 	nop
-	setb P2.2
-	clr P2.2
-	nop
-	setb P2.2
-	nop
-	clr P2.2
-	setb P2.2
-	clr P2.2
-	nop
-	setb P2.2
-	clr P2.2
-	nop
-	setb P2.2
-	nop
-	clr P2.2
-	setb P2.2
-	clr P2.2
-	nop
-	setb P2.2
-	clr P2.2
-	nop
+
+
+
+
+
+
+
+
 
 
 
