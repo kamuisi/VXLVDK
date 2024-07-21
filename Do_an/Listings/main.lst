@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  MAIN                                                                 07/15/2024 17:46:07 PAGE     1
+A51 MACRO ASSEMBLER  MAIN                                                                 07/21/2024 08:47:15 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -65,7 +65,7 @@ LOC  OBJ            LINE     SOURCE
                 +1    55     
                 +1    56     
                 +1    57     
-A51 MACRO ASSEMBLER  MAIN                                                                 07/15/2024 17:46:07 PAGE     2
+A51 MACRO ASSEMBLER  MAIN                                                                 07/21/2024 08:47:15 PAGE     2
 
                 +1    58     
                 +1    59     
@@ -133,7 +133,7 @@ LOC  OBJ            LINE     SOURCE
                 +1   121     
                 +1   122     
                 +1   123     
-A51 MACRO ASSEMBLER  MAIN                                                                 07/15/2024 17:46:07 PAGE     3
+A51 MACRO ASSEMBLER  MAIN                                                                 07/21/2024 08:47:15 PAGE     3
 
                 +1   124     
   00A0          +1   125     sbit P2_0 = 0xA0;
@@ -201,7 +201,7 @@ LOC  OBJ            LINE     SOURCE
   00CF          +1   187     sbit TF2  = 0xCF;       /* Timer 2 overflow flag */
                 +1   188     
                 +1   189     
-A51 MACRO ASSEMBLER  MAIN                                                                 07/15/2024 17:46:07 PAGE     4
+A51 MACRO ASSEMBLER  MAIN                                                                 07/21/2024 08:47:15 PAGE     4
 
                 +1   190     
                 +1   191     
@@ -269,7 +269,7 @@ LOC  OBJ            LINE     SOURCE
 0057 9401            253             subb A, #1d
 0059 6008            254             jz E_1
 005B 9401            255             subb A, #1d
-A51 MACRO ASSEMBLER  MAIN                                                                 07/15/2024 17:46:07 PAGE     5
+A51 MACRO ASSEMBLER  MAIN                                                                 07/21/2024 08:47:15 PAGE     5
 
 005D 6008            256             jz E_2
 005F 9401            257             subb A, #1d
@@ -337,7 +337,7 @@ LOC  OBJ            LINE     SOURCE
                      319             
 00AA                 320             Turn_On_Effect_1:
 00AA 12012E          321             lcall Send_1
-A51 MACRO ASSEMBLER  MAIN                                                                 07/15/2024 17:46:07 PAGE     6
+A51 MACRO ASSEMBLER  MAIN                                                                 07/21/2024 08:47:15 PAGE     6
 
 00AD                 322             Turn_Off_Effect_1:
 00AD 1201A9          323             lcall Send_0
@@ -374,144 +374,144 @@ LOC  OBJ            LINE     SOURCE
 00D5 9410            354             subb A, #16d
 00D7 7A00            355             mov R2, #0d  ;neu dieu kien duoi dung thi khong bat led
 00D9 501E            356             jnc Turn_Off_Effect_3 ; kiem tra R4 >= 16 khong
-00DB BC0006          357             cjne R4, #0d, Calc_Effect_3
-00DE 7A08            358             mov R2, #8d ;nua thanh led dau
-00E0 7408            359             mov A, #8d  ; nua thanh led sau
-00E2 800D            360             jmp Turn_Half_First_On_Effect_3
-                     361             
-00E4                 362             Calc_Effect_3:
-00E4 7410            363             mov A, #16d
-00E6 9C              364             subb A, R4 ;tinh so led bat
-00E7 75F002          365             mov B, #2d
-00EA 84              366             div AB
-00EB FA              367             mov R2, A
-00EC E5F0            368             mov A, B
-00EE 2C              369             add A, R4
-00EF FC              370             mov R4, A    ;xu ly so led tat bi le bang cach cong so du sau phep chia
-00F0 EA              371             mov A, R2
-                     372             
-00F1                 373             Turn_Half_First_On_Effect_3:
-00F1 12012E          374             lcall Send_1
-00F4 FA              375             mov R2, A
-00F5 9408            376             subb A, #8d
-00F7 5008            377             jnc Turn_Half_Second_On_Effect_3 ;kiem tra co phai bat full 2 thanh led
-                     378             
-00F9                 379             Turn_Off_Effect_3:
-00F9 1201A9          380             lcall Send_0
-00FC EA              381             mov A, R2
-00FD 9401            382             subb A, #1d
-00FF 4003            383             jc exit_effect_3
-                     384             
-0101                 385             Turn_Half_Second_On_Effect_3:
-0101 12012E          386             lcall Send_1
-                     387             
-A51 MACRO ASSEMBLER  MAIN                                                                 07/15/2024 17:46:07 PAGE     7
+00DB BC0004          357             cjne R4, #0d, Calc_Effect_3
+00DE 7A10            358             mov R2, #16d ;bat full led
+00E0 801F            359             jmp Turn_Half_Second_On_Effect_3
+                     360             
+00E2                 361             Calc_Effect_3:
+00E2 7410            362             mov A, #16d
+00E4 9C              363             subb A, R4 ;tinh so led bat
+00E5 75F002          364             mov B, #2d
+00E8 84              365             div AB
+00E9 FA              366             mov R2, A
+00EA E5F0            367             mov A, B
+00EC 2C              368             add A, R4
+00ED FC              369             mov R4, A    ;xu ly so led tat bi le bang cach cong so du sau phep chia
+00EE EA              370             mov A, R2
+00EF BA0004          371             cjne R2, #0d, Turn_Half_First_On_Effect_3 ; 1/2 A = 0 B = 2
+00F2 7C10            372             mov R4, #16d
+00F4 8003            373             jmp Turn_Off_Effect_3
+                     374             
+00F6                 375             Turn_Half_First_On_Effect_3:
+00F6 12012E          376             lcall Send_1
+                     377             
+00F9                 378             Turn_Off_Effect_3:
+00F9 1201A9          379             lcall Send_0
+00FC FA              380             mov R2, A
+00FD 9401            381             subb A, #1d
+00FF 4003            382             jc exit_effect_3
+                     383             
+0101                 384             Turn_Half_Second_On_Effect_3:
+0101 12012E          385             lcall Send_1
+                     386             
+0104                 387             exit_effect_3:
+A51 MACRO ASSEMBLER  MAIN                                                                 07/21/2024 08:47:15 PAGE     7
 
-0104                 388             exit_effect_3:
-0104 120127          389             lcall Res_back
-0107 22              390             ret
-                     391     
-0108                 392             Change_Effect:
-0108 0F              393             inc R7
-0109 BF0402          394             cjne R7, #4d, exit_change
-010C 7F01            395             mov R7, #1d
-010E                 396             exit_change:
-010E 75CD00          397             mov TH2, #0h
-0111 75CC00          398             mov TL2, #0h
-0114 C2CF            399             clr TF2
-0116 32              400             reti
-                     401             
-0117                 402             Delay:
-0117 758CFE          403             mov TH0, #0feh
-011A 758AF9          404             mov TL0, #0f9h
-011D D28C            405             setb TR0
-011F 308DFD          406             loop: jnb TF0, loop
-0122 C28D            407             clr TF0
-0124 C28C            408             clr TR0
-0126 22              409             ret
-                     410             
-0127                 411             Res_back:
-0127 7971            412             mov R1, #113d
-0129 C2A2            413             clr P2.2
-012B                 414             wait:
-012B D9FE            415             djnz R1, wait
-012D 22              416             ret
-                     417             
-012E                 418             Send_1:
-012E D2A2            419             setb P2.2
-0130 C2A2            420             clr P2.2
-0132 00              421             nop
-0133 D2A2            422             setb P2.2
-0135 C2A2            423             clr P2.2
-0137 00              424             nop
-0138 D2A2            425             setb P2.2
-013A C2A2            426             clr P2.2
-013C 00              427             nop
-013D D2A2            428             setb P2.2
-013F C2A2            429             clr P2.2
-0141 00              430             nop
-0142 D2A2            431             setb P2.2
-0144 00              432             nop
-0145 C2A2            433             clr P2.2
-0147 D2A2            434             setb P2.2
-0149 00              435             nop
-014A C2A2            436             clr P2.2
-014C D2A2            437             setb P2.2
-014E C2A2            438             clr P2.2
-0150 00              439             nop
-0151 D2A2            440             setb P2.2
-0153 C2A2            441             clr P2.2
-0155 00              442             nop
-0156 D2A2            443             setb P2.2
-0158 C2A2            444             clr P2.2
-015A 00              445             nop
-015B D2A2            446             setb P2.2
-015D C2A2            447             clr P2.2
-015F 00              448             nop
-0160 D2A2            449             setb P2.2
-0162 C2A2            450             clr P2.2
-0164 00              451             nop
-0165 D2A2            452             setb P2.2
-0167 C2A2            453             clr P2.2
-A51 MACRO ASSEMBLER  MAIN                                                                 07/15/2024 17:46:07 PAGE     8
+0104 120127          388             lcall Res_back
+0107 22              389             ret
+                     390     
+0108                 391             Change_Effect:
+0108 0F              392             inc R7
+0109 BF0402          393             cjne R7, #4d, exit_change
+010C 7F01            394             mov R7, #1d
+010E                 395             exit_change:
+010E 75CD00          396             mov TH2, #0h
+0111 75CC00          397             mov TL2, #0h
+0114 C2CF            398             clr TF2
+0116 32              399             reti
+                     400             
+0117                 401             Delay:
+0117 758CFE          402             mov TH0, #0feh
+011A 758AF9          403             mov TL0, #0f9h
+011D D28C            404             setb TR0
+011F 308DFD          405             loop: jnb TF0, loop
+0122 C28D            406             clr TF0
+0124 C28C            407             clr TR0
+0126 22              408             ret
+                     409             
+0127                 410             Res_back:
+0127 7971            411             mov R1, #113d
+0129 C2A2            412             clr P2.2
+012B                 413             wait:
+012B D9FE            414             djnz R1, wait
+012D 22              415             ret
+                     416             
+012E                 417             Send_1:
+012E D2A2            418             setb P2.2
+0130 C2A2            419             clr P2.2
+0132 00              420             nop
+0133 D2A2            421             setb P2.2
+0135 C2A2            422             clr P2.2
+0137 00              423             nop
+0138 D2A2            424             setb P2.2
+013A C2A2            425             clr P2.2
+013C 00              426             nop
+013D D2A2            427             setb P2.2
+013F C2A2            428             clr P2.2
+0141 00              429             nop
+0142 D2A2            430             setb P2.2
+0144 00              431             nop
+0145 C2A2            432             clr P2.2
+0147 D2A2            433             setb P2.2
+0149 00              434             nop
+014A C2A2            435             clr P2.2
+014C D2A2            436             setb P2.2
+014E C2A2            437             clr P2.2
+0150 00              438             nop
+0151 D2A2            439             setb P2.2
+0153 C2A2            440             clr P2.2
+0155 00              441             nop
+0156 D2A2            442             setb P2.2
+0158 C2A2            443             clr P2.2
+015A 00              444             nop
+015B D2A2            445             setb P2.2
+015D C2A2            446             clr P2.2
+015F 00              447             nop
+0160 D2A2            448             setb P2.2
+0162 C2A2            449             clr P2.2
+0164 00              450             nop
+0165 D2A2            451             setb P2.2
+0167 C2A2            452             clr P2.2
+0169 00              453             nop
+A51 MACRO ASSEMBLER  MAIN                                                                 07/21/2024 08:47:15 PAGE     8
 
-0169 00              454             nop
-016A D2A2            455             setb P2.2
-016C 00              456             nop
-016D C2A2            457             clr P2.2
-016F D2A2            458             setb P2.2
-0171 00              459             nop
-0172 C2A2            460             clr P2.2
-0174 D2A2            461             setb P2.2
-0176 C2A2            462             clr P2.2
-0178 00              463             nop
-0179 D2A2            464             setb P2.2
-017B C2A2            465             clr P2.2
-017D 00              466             nop
-017E D2A2            467             setb P2.2
-0180 C2A2            468             clr P2.2
-0182 00              469             nop
-0183 D2A2            470             setb P2.2
-0185 C2A2            471             clr P2.2
-0187 00              472             nop
-0188 D2A2            473             setb P2.2
-018A C2A2            474             clr P2.2
-018C 00              475             nop
-018D D2A2            476             setb P2.2
-018F C2A2            477             clr P2.2
-0191 00              478             nop
-0192 D2A2            479             setb P2.2
-0194 00              480             nop
-0195 C2A2            481             clr P2.2
-0197 D2A2            482             setb P2.2
-0199 00              483             nop
-019A C2A2            484             clr P2.2
-019C D2A2            485             setb P2.2
-019E C2A2            486             clr P2.2
-01A0 00              487             nop
-01A1 D2A2            488             setb P2.2
-01A3 C2A2            489             clr P2.2
-01A5 00              490             nop
+016A D2A2            454             setb P2.2
+016C 00              455             nop
+016D C2A2            456             clr P2.2
+016F D2A2            457             setb P2.2
+0171 00              458             nop
+0172 C2A2            459             clr P2.2
+0174 D2A2            460             setb P2.2
+0176 C2A2            461             clr P2.2
+0178 00              462             nop
+0179 D2A2            463             setb P2.2
+017B C2A2            464             clr P2.2
+017D 00              465             nop
+017E D2A2            466             setb P2.2
+0180 C2A2            467             clr P2.2
+0182 00              468             nop
+0183 D2A2            469             setb P2.2
+0185 C2A2            470             clr P2.2
+0187 00              471             nop
+0188 D2A2            472             setb P2.2
+018A C2A2            473             clr P2.2
+018C 00              474             nop
+018D D2A2            475             setb P2.2
+018F C2A2            476             clr P2.2
+0191 00              477             nop
+0192 D2A2            478             setb P2.2
+0194 00              479             nop
+0195 C2A2            480             clr P2.2
+0197 D2A2            481             setb P2.2
+0199 00              482             nop
+019A C2A2            483             clr P2.2
+019C D2A2            484             setb P2.2
+019E C2A2            485             clr P2.2
+01A0 00              486             nop
+01A1 D2A2            487             setb P2.2
+01A3 C2A2            488             clr P2.2
+01A5 00              489             nop
+                     490     
                      491     
                      492     
                      493     
@@ -523,125 +523,124 @@ LOC  OBJ            LINE     SOURCE
                      499     
                      500     
                      501     
-                     502     
-01A6 DA86            503             djnz R2, Send_1
-01A8 22              504             ret
-                     505             
-01A9                 506             Send_0:
-01A9 D2A2            507             setb P2.2
-01AB C2A2            508             clr P2.2
-01AD 00              509             nop
-                     510             
-01AE D2A2            511             setb P2.2
-01B0 C2A2            512             clr P2.2
-01B2 00              513             nop
-                     514             
-01B3 D2A2            515             setb P2.2
-01B5 C2A2            516             clr P2.2
-01B7 00              517             nop
-                     518             
-01B8 D2A2            519             setb P2.2
-A51 MACRO ASSEMBLER  MAIN                                                                 07/15/2024 17:46:07 PAGE     9
+01A6 DA86            502             djnz R2, Send_1
+01A8 22              503             ret
+                     504             
+01A9                 505             Send_0:
+01A9 D2A2            506             setb P2.2
+01AB C2A2            507             clr P2.2
+01AD 00              508             nop
+                     509             
+01AE D2A2            510             setb P2.2
+01B0 C2A2            511             clr P2.2
+01B2 00              512             nop
+                     513             
+01B3 D2A2            514             setb P2.2
+01B5 C2A2            515             clr P2.2
+01B7 00              516             nop
+                     517             
+01B8 D2A2            518             setb P2.2
+01BA C2A2            519             clr P2.2
+A51 MACRO ASSEMBLER  MAIN                                                                 07/21/2024 08:47:15 PAGE     9
 
-01BA C2A2            520             clr P2.2
-01BC 00              521             nop
-                     522             
-01BD D2A2            523             setb P2.2
-01BF C2A2            524             clr P2.2
-01C1 00              525             nop
-                     526             
-01C2 D2A2            527             setb P2.2
-01C4 C2A2            528             clr P2.2
-01C6 00              529             nop
-                     530             
-01C7 D2A2            531             setb P2.2
-01C9 C2A2            532             clr P2.2
-01CB 00              533             nop
-                     534             
-01CC D2A2            535             setb P2.2
-01CE C2A2            536             clr P2.2
-01D0 00              537             nop
-                     538             
-01D1 D2A2            539             setb P2.2
-01D3 C2A2            540             clr P2.2
-01D5 00              541             nop
-                     542             
-01D6 D2A2            543             setb P2.2
-01D8 C2A2            544             clr P2.2
-01DA 00              545             nop
-                     546             
-01DB D2A2            547             setb P2.2
-01DD C2A2            548             clr P2.2
-01DF 00              549             nop
-                     550             
-01E0 D2A2            551             setb P2.2
-01E2 C2A2            552             clr P2.2
-01E4 00              553             nop
-                     554             
-01E5 D2A2            555             setb P2.2
-01E7 C2A2            556             clr P2.2
-01E9 00              557             nop
-                     558             
-01EA D2A2            559             setb P2.2
-01EC C2A2            560             clr P2.2
-01EE 00              561             nop
-                     562             
-01EF D2A2            563             setb P2.2
-01F1 C2A2            564             clr P2.2
-01F3 00              565             nop
-                     566             
-01F4 D2A2            567             setb P2.2
-01F6 C2A2            568             clr P2.2
-01F8 00              569             nop
-                     570             
-01F9 D2A2            571             setb P2.2
-01FB C2A2            572             clr P2.2
-01FD 00              573             nop
-                     574             
-01FE D2A2            575             setb P2.2
-0200 C2A2            576             clr P2.2
-0202 00              577             nop
-                     578             
-0203 D2A2            579             setb P2.2
-0205 C2A2            580             clr P2.2
-0207 00              581             nop
-                     582             
-0208 D2A2            583             setb P2.2
-020A C2A2            584             clr P2.2
-020C 00              585             nop
-A51 MACRO ASSEMBLER  MAIN                                                                 07/15/2024 17:46:07 PAGE    10
+01BC 00              520             nop
+                     521             
+01BD D2A2            522             setb P2.2
+01BF C2A2            523             clr P2.2
+01C1 00              524             nop
+                     525             
+01C2 D2A2            526             setb P2.2
+01C4 C2A2            527             clr P2.2
+01C6 00              528             nop
+                     529             
+01C7 D2A2            530             setb P2.2
+01C9 C2A2            531             clr P2.2
+01CB 00              532             nop
+                     533             
+01CC D2A2            534             setb P2.2
+01CE C2A2            535             clr P2.2
+01D0 00              536             nop
+                     537             
+01D1 D2A2            538             setb P2.2
+01D3 C2A2            539             clr P2.2
+01D5 00              540             nop
+                     541             
+01D6 D2A2            542             setb P2.2
+01D8 C2A2            543             clr P2.2
+01DA 00              544             nop
+                     545             
+01DB D2A2            546             setb P2.2
+01DD C2A2            547             clr P2.2
+01DF 00              548             nop
+                     549             
+01E0 D2A2            550             setb P2.2
+01E2 C2A2            551             clr P2.2
+01E4 00              552             nop
+                     553             
+01E5 D2A2            554             setb P2.2
+01E7 C2A2            555             clr P2.2
+01E9 00              556             nop
+                     557             
+01EA D2A2            558             setb P2.2
+01EC C2A2            559             clr P2.2
+01EE 00              560             nop
+                     561             
+01EF D2A2            562             setb P2.2
+01F1 C2A2            563             clr P2.2
+01F3 00              564             nop
+                     565             
+01F4 D2A2            566             setb P2.2
+01F6 C2A2            567             clr P2.2
+01F8 00              568             nop
+                     569             
+01F9 D2A2            570             setb P2.2
+01FB C2A2            571             clr P2.2
+01FD 00              572             nop
+                     573             
+01FE D2A2            574             setb P2.2
+0200 C2A2            575             clr P2.2
+0202 00              576             nop
+                     577             
+0203 D2A2            578             setb P2.2
+0205 C2A2            579             clr P2.2
+0207 00              580             nop
+                     581             
+0208 D2A2            582             setb P2.2
+020A C2A2            583             clr P2.2
+020C 00              584             nop
+                     585             
+A51 MACRO ASSEMBLER  MAIN                                                                 07/21/2024 08:47:15 PAGE    10
 
-                     586             
-020D D2A2            587             setb P2.2
-020F C2A2            588             clr P2.2
-0211 00              589             nop
-                     590             
-0212 D2A2            591             setb P2.2
-0214 C2A2            592             clr P2.2
-0216 00              593             nop
-                     594             
-0217 D2A2            595             setb P2.2
-0219 C2A2            596             clr P2.2
-021B 00              597             nop
-                     598             
-021C D2A2            599             setb P2.2
-021E C2A2            600             clr P2.2
-0220 00              601             nop
-0221 DC86            602             djnz R4, Send_0
-0223 22              603             ret
-                     604             
-0224                 605             Clock:
-0224 20A304          606             jb P2.3, zero
-0227 D2A3            607             setb P2.3
-0229 8002            608             jmp exit_clock
-022B                 609             zero:
-022B C2A3            610             clr P2.3
-022D                 611             exit_clock:
-022D 758DFF          612             mov TH1, #0ffh
-0230 758BFD          613             mov TL1, #0fdh
-0233 22              614             ret
-                     615     END
-A51 MACRO ASSEMBLER  MAIN                                                                 07/15/2024 17:46:07 PAGE    11
+020D D2A2            586             setb P2.2
+020F C2A2            587             clr P2.2
+0211 00              588             nop
+                     589             
+0212 D2A2            590             setb P2.2
+0214 C2A2            591             clr P2.2
+0216 00              592             nop
+                     593             
+0217 D2A2            594             setb P2.2
+0219 C2A2            595             clr P2.2
+021B 00              596             nop
+                     597             
+021C D2A2            598             setb P2.2
+021E C2A2            599             clr P2.2
+0220 00              600             nop
+0221 DC86            601             djnz R4, Send_0
+0223 22              602             ret
+                     603             
+0224                 604             Clock:
+0224 20A304          605             jb P2.3, zero
+0227 D2A3            606             setb P2.3
+0229 8002            607             jmp exit_clock
+022B                 608             zero:
+022B C2A3            609             clr P2.3
+022D                 610             exit_clock:
+022D 758DFF          611             mov TH1, #0ffh
+0230 758BFD          612             mov TL1, #0fdh
+0233 22              613             ret
+                     614     END
+A51 MACRO ASSEMBLER  MAIN                                                                 07/21/2024 08:47:15 PAGE    11
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -655,7 +654,7 @@ ALL_LED_ON . . . . . . . . .  C ADDR   00BFH   A
 B. . . . . . . . . . . . . .  D ADDR   00F0H   A   
 CALC_EFFECT_1. . . . . . . .  C ADDR   00A6H   A   
 CALC_EFFECT_2. . . . . . . .  C ADDR   00C6H   A   
-CALC_EFFECT_3. . . . . . . .  C ADDR   00E4H   A   
+CALC_EFFECT_3. . . . . . . .  C ADDR   00E2H   A   
 CHANGE_EFFECT. . . . . . . .  C ADDR   0108H   A   
 CLOCK. . . . . . . . . . . .  C ADDR   0224H   A   
 CP_RL2 . . . . . . . . . . .  B ADDR   00C8H.0 A   
@@ -709,7 +708,7 @@ P0_3 . . . . . . . . . . . .  B ADDR   0080H.3 A
 P0_4 . . . . . . . . . . . .  B ADDR   0080H.4 A   
 P0_5 . . . . . . . . . . . .  B ADDR   0080H.5 A   
 P0_6 . . . . . . . . . . . .  B ADDR   0080H.6 A   
-A51 MACRO ASSEMBLER  MAIN                                                                 07/15/2024 17:46:07 PAGE    12
+A51 MACRO ASSEMBLER  MAIN                                                                 07/21/2024 08:47:15 PAGE    12
 
 P0_7 . . . . . . . . . . . .  B ADDR   0080H.7 A   
 P1 . . . . . . . . . . . . .  D ADDR   0090H   A   
@@ -777,7 +776,7 @@ TCLK . . . . . . . . . . . .  B ADDR   00C8H.4 A
 TCON . . . . . . . . . . . .  D ADDR   0088H   A   
 TF0. . . . . . . . . . . . .  B ADDR   0088H.5 A   
 TF1. . . . . . . . . . . . .  B ADDR   0088H.7 A   
-A51 MACRO ASSEMBLER  MAIN                                                                 07/15/2024 17:46:07 PAGE    13
+A51 MACRO ASSEMBLER  MAIN                                                                 07/21/2024 08:47:15 PAGE    13
 
 TF2. . . . . . . . . . . . .  B ADDR   00C8H.7 A   
 TH0. . . . . . . . . . . . .  D ADDR   008CH   A   
@@ -791,7 +790,7 @@ TMOD . . . . . . . . . . . .  D ADDR   0089H   A
 TR0. . . . . . . . . . . . .  B ADDR   0088H.4 A   
 TR1. . . . . . . . . . . . .  B ADDR   0088H.6 A   
 TR2. . . . . . . . . . . . .  B ADDR   00C8H.2 A   
-TURN_HALF_FIRST_ON_EFFECT_3.  C ADDR   00F1H   A   
+TURN_HALF_FIRST_ON_EFFECT_3.  C ADDR   00F6H   A   
 TURN_HALF_SECOND_ON_EFFECT_3  C ADDR   0101H   A   
 TURN_OFF_EFFECT_1. . . . . .  C ADDR   00ADH   A   
 TURN_OFF_EFFECT_2. . . . . .  C ADDR   00CAH   A   

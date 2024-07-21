@@ -133,9 +133,8 @@ org 30h
 	mov R2, #0d  ;neu dieu kien duoi dung thi khong bat led
 	jnc Turn_Off_Effect_3 ; kiem tra R4 >= 16 khong
 	cjne R4, #0d, Calc_Effect_3
-	mov R2, #8d ;nua thanh led dau
-	mov A, #8d  ; nua thanh led sau
-	jmp Turn_Half_First_On_Effect_3
+	mov R2, #16d ;bat full led
+	jmp Turn_Half_Second_On_Effect_3
 	
 	Calc_Effect_3:
 	mov A, #16d
@@ -147,16 +146,16 @@ org 30h
 	add A, R4
 	mov R4, A    ;xu ly so led tat bi le bang cach cong so du sau phep chia
 	mov A, R2
+	cjne R2, #0d, Turn_Half_First_On_Effect_3 ; 1/2 A = 0 B = 2
+	mov R4, #16d
+	jmp Turn_Off_Effect_3
 	
 	Turn_Half_First_On_Effect_3:
 	lcall Send_1
-	mov R2, A
-	subb A, #8d
-	jnc Turn_Half_Second_On_Effect_3 ;kiem tra co phai bat full 2 thanh led
 	
 	Turn_Off_Effect_3:
 	lcall Send_0
-	mov A, R2
+	mov R2, A
 	subb A, #1d
 	jc exit_effect_3
 	
