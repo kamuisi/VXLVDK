@@ -1,32 +1,31 @@
-#include <REGX52.H>
 org 0h
 	ljmp init
+org 0bh
+	lcall Change_Effect
+	reti
 org 1bh
 	lcall Clock
-	reti
-org 02bh
-	lcall Change_Effect
 	reti
 	
 org 30h
 	init:
 	mov TMOD, #00010001b
-	mov IE, #10101000b
+	mov IE, #10001010b
+	mov TH0, #0h
+	mov TL0, #0h
 	mov TH1, #0ffh
-	mov TL1, #0fdh
-	mov TH2, #0h
-	mov TL2, #0h
+	mov TL1, #0feh
 	mov R0, #1d
 	mov R2, #16d
 	mov R7, #1d
 	lcall Send_1
 	lcall Res_back
+	setb P2.1
 	main:
 	acall Get_sample
 	clr TR1
-	setb TR2
-	clr TR2
-	
+	setb TR0
+	clr TR0
 	mov A, R7
 	subb A, #1d
 	jz E_1
@@ -51,7 +50,6 @@ org 30h
 	
 	Get_sample:
 	setb TR1
-	setb P2.1
 	acall Delay
 	mov B, P1    ;doc adc
 	
@@ -166,25 +164,24 @@ org 30h
 	lcall Res_back
 	ret
 
+	Delay:
+		mov R1, #0ffh
+	stay: djnz R1, stay
+	ret
+	
+	
+	
+	
+	
 	Change_Effect:
 	inc R7
 	cjne R7, #4d, exit_change
 	mov R7, #1d
 	exit_change:
-	mov TH2, #0h
-	mov TL2, #0h
-	clr TF2
+	mov TH0, #0h
+	mov TL0, #0h
 	reti
-	
-	Delay:
-	mov TH0, #0feh
-	mov TL0, #0f9h
-	setb TR0
-	loop: jnb TF0, loop
-	clr TF0
-	clr TR0
-	ret
-	
+		
 	Res_back:
 	mov R1, #113d
 	clr P2.2
@@ -380,13 +377,8 @@ org 30h
 	ret
 	
 	Clock:
-	jb P2.3, zero
-	setb P2.3
-	jmp exit_clock
-	zero:
-	clr P2.3
-	exit_clock:
+	cpl P2.3
 	mov TH1, #0ffh
-	mov TL1, #0fdh
+	mov TL1, #0feh
 	ret
 END
