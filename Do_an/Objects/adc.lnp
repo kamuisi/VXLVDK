@@ -1,3 +1,0 @@
-".\Objects\adc.obj" 
-TO ".\Objects\adc" 
-PRINT(".\Listings\adc.m51") RAMSIZE(256) 
